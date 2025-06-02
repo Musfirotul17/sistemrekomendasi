@@ -164,21 +164,21 @@ Distribusi Data: Rating yang diberikan oleh pengguna bervariasi, dengan beberapa
 
 ## Modeling
 Dalam proyek ini, saya membangun dua sistem rekomendasi untuk membantu pengguna menemukan anime yang relevan dengan preferensi mereka. Dua pendekatan yang digunakan adalah Collaborative Filtering dan Content-Based Filtering, masing-masing dengan algoritma yang berbeda dan karakteristik unik. Hasil dari kedua pendekatan ini disajikan dalam bentuk Top-N Recommendation.
-    1. Collaborative Filtering - K-Nearest Neighbors (KNN)
+1. Collaborative Filtering - K-Nearest Neighbors (KNN)
         Pada pendekatan ini, sistem rekomendasi dibuat dengan memanfaatkan interaksi pengguna (misalnya rating) terhadap anime tertentu. Pendekatan ini dikenal sebagai user-item collaborative filtering. Implementasi menggunakan algoritma **K-Nearest Neighbors (KNN)** dengan **cosine similarity** sebagai metrik kemiripan antar item (anime).
 
             *model_knn = NearestNeighbors(metric = "cosine", algorithm = "brute")*
             *model_knn.fit(data_matrix)*
 
-        Top-N Recommendation Output:
-        Contoh rekomendasi untuk anime "Mahou no Yousei Persia":
-        | No | Anime Name                      | Rating |
-        | -- | ------------------------------- | ------ |
-        | 1  | Sasurai no Taiyou               | 6.42   |
-        | 2  | Akuu Daisakusen Srungle         | 6.55   |
-        | 3  | Bikkuriman                      | 6.68   |
-        | 4  | Mahou no Idol Pastel Yumi       | 6.45   |
-        | 5  | Honey Honey no Suteki na Bouken | 6.58   |
+   Top-N Recommendation Output:
+   Contoh rekomendasi untuk anime "Mahou no Yousei Persia":
+   | No | Anime Name                      | Rating |
+   | -- | ------------------------------- | ------ |
+   | 1  | Sasurai no Taiyou               | 6.42   |
+   | 2  | Akuu Daisakusen Srungle         | 6.55   |
+   | 3  | Bikkuriman                      | 6.68   |
+   | 4  | Mahou no Idol Pastel Yumi       | 6.45   |
+   | 5  | Honey Honey no Suteki na Bouken | 6.58   |
     
     ✅ Kelebihan:
         - Personalized Recommendation: Memberikan rekomendasi yang sesuai dengan pola perilaku pengguna lain yang memiliki selera serupa.
@@ -190,7 +190,7 @@ Dalam proyek ini, saya membangun dua sistem rekomendasi untuk membantu pengguna 
         - Data Sparsity: Rentan terhadap data yang jarang atau sedikit interaksi antar pengguna dan item.
         - Scalability: Kurang efisien untuk dataset besar karena proses pencarian tetangga mirip bisa sangat mahal secara komputasi.
 
-    2. Content-Based Filtering - TF-IDF + Sigmoid Kernel
+2. Content-Based Filtering - TF-IDF + Sigmoid Kernel
     Pendekatan kedua menggunakan informasi konten dari anime, dalam hal ini adalah genre. Setiap anime diubah menjadi representasi numerik berbasis teks menggunakan **TF-IDF vectorizer**, lalu dihitung kemiripannya menggunakan **sigmoid kernel**.
 
         *tfv = TfidfVectorizer(...)*
@@ -198,18 +198,18 @@ Dalam proyek ini, saya membangun dua sistem rekomendasi untuk membantu pengguna 
 
     Top-N Recommendation Output:
     Contoh rekomendasi untuk anime "Bleach":
-        | No | Anime Name                                        | Rating |
-        | -- | ------------------------------------------------- | ------ |
-        | 1  | Detective Conan Movie 19: The Hellfire Sunflowers | 7.77   |
-        | 2  | Persona 4 the Animation                           | 7.68   |
-        | 3  | Shelter                                           | 8.38   |
-        | 4  | Hotori: Tada Saiwai wo Koinegau                   | 7.14   |
-        | 5  | Chibi☆Devi!                                       | 6.86   |
-        | 6  | Oyayubi Hime Monogatari                           | 6.85   |
-        | 7  | Taimadou Gakuen 35 Shiken Shoutai                 | 7.05   |
-        | 8  | Shikabane Hime: Kuro Special                      | 7.12   |
-        | 9  | Choujin Locke                                     | 6.65   |
-        | 10 | Naruto                                            | 7.81   |
+   | No | Anime Name                                        | Rating |
+   | -- | ------------------------------------------------- | ------ |
+   | 1  | Detective Conan Movie 19: The Hellfire Sunflowers | 7.77   |
+   | 2  | Persona 4 the Animation                           | 7.68   |
+   | 3  | Shelter                                           | 8.38   |
+   | 4  | Hotori: Tada Saiwai wo Koinegau                   | 7.14   |
+   | 5  | Chibi☆Devi!                                       | 6.86   |
+   | 6  | Oyayubi Hime Monogatari                           | 6.85   |
+   | 7  | Taimadou Gakuen 35 Shiken Shoutai                 | 7.05   |
+   | 8  | Shikabane Hime: Kuro Special                      | 7.12   |
+   | 9  | Choujin Locke                                     | 6.65   |
+   | 10 | Naruto                                            | 7.81   |
 
     ✅ Kelebihan:
         - Tidak bergantung pada pengguna lain: Dapat memberikan rekomendasi walaupun data pengguna sedikit atau tidak ada.
@@ -237,15 +237,15 @@ Dalam proyek ini, dua pendekatan sistem rekomendasi dievaluasi menggunakan metri
 
 Precision@K mengukur proporsi item yang relevan di antara K item yang direkomendasikan.
 
-\[
+  $$
 \text{Precision@K} = \frac{\text{Jumlah item relevan dalam rekomendasi top-K}}{K}
-\]
+$$
 
-Contoh: Jika dari 10 rekomendasi, 7 anime dianggap relevan oleh pengguna, maka:
+**Contoh**: Jika dari 10 rekomendasi, 7 anime dianggap relevan oleh pengguna, maka:
 
-\[
-\text{Precision@10} = \frac{7}{10} = 0.70
-\]
+$$
+\text{Precision@10} = \frac{7}{10} = 0{.}70
+$$
 
 **Hasil Evaluasi:**
 
@@ -259,9 +259,7 @@ Berdasarkan hasil rekomendasi terhadap anime seperti *"Bleach"*, mayoritas anime
 
 Cosine Similarity mengukur tingkat kemiripan antara dua vektor berdasarkan arah (bukan nilai absolut):
 
-\[
-\text{cosine\_similarity}(A, B) = \frac{A \cdot B}{||A|| \times ||B||}
-\]
+ $\text{cosine\_similarity}(A, B) = \frac{A \cdot B}{\|A\| \times \|B\|}$
 
 Nilai berkisar antara 0 (tidak mirip) hingga 1 (sangat mirip).
 
