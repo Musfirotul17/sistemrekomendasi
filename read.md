@@ -113,6 +113,7 @@ Distribusi Data: Rating yang diberikan oleh pengguna bervariasi, dengan beberapa
         Death Note memimpin dengan lebih dari 1 juta member, menandakan pengaruh dan popularitas globalnya.
         Anime-anime populer lainnya seperti Fullmetal Alchemist, Shingeki no Kyojin, dan Sword Art Online juga menunjukkan engagement komunitas yang tinggi.
         Ini berguna untuk sistem rekomendasi: anime dengan basis komunitas besar mungkin memiliki rating/review yang lebih andal.
+      ![Visualisasi](./asset/topmember.png)
     - Distribusi Kategori Anime
         Analisis Kategori: 
         Menggunakan value_counts() untuk menghitung jumlah anime dalam setiap kategori (type).
@@ -124,6 +125,7 @@ Distribusi Data: Rating yang diberikan oleh pengguna bervariasi, dengan beberapa
         TV menjadi kategori paling dominan, mencakup 30.87% dari total, menandakan bahwa anime serial TV adalah bentuk yang paling umum.
         Kategori OVA dan Movie juga memiliki proporsi besar, menunjukkan bahwa konten non-TV tetap populer.
         ONA (Online) dan Music punya persentase kecil, namun tetap penting mengingat perkembangan platform streaming.
+      ![Visualisasi](./asset/kategori.png)
     - Wordcloud Genre Anime
         Untuk melihat representasi visual dari genre anime yang paling umum, dibuat wordcloud menggunakan WordCloud() dari pustaka wordcloud. Genre digabungkan menjadi satu string dan divisualisasikan dengan latar belakang hitam dan colormap "Set2".
         Deskripsi:
@@ -132,6 +134,7 @@ Distribusi Data: Rating yang diberikan oleh pengguna bervariasi, dengan beberapa
         Genre yang paling menonjol: Action, Adventure, Comedy, Sci-Fi, Fantasy, Shounen.
         Genre besar ini menunjukkan preferensi pengguna umum dan dapat menjadi fitur penting untuk personalisasi rekomendasi.
         Genre minor seperti Mystery, Police, Dementia masih muncul, menandakan variasi dalam minat pengguna.
+      ![Visualisasi](./asset/worldcloud.png)
 
 ## Data Preparation
     1. Menghapus Nilai Kosong pada Dataset Anime
