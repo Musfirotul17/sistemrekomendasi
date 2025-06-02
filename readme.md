@@ -137,29 +137,29 @@ Distribusi Data: Rating yang diberikan oleh pengguna bervariasi, dengan beberapa
       ![Visualisasi](./asset/worldcloud.png)
 
 ## Data Preparation
-    1. Menghapus Nilai Kosong pada Dataset Anime
+1. Menghapus Nilai Kosong pada Dataset Anime
         Langkah pertama dalam proses data preparation adalah menghapus nilai kosong (missing values) pada dataset anime.csv. Hal ini dilakukan untuk memastikan bahwa analisis selanjutnya tidak terganggu oleh data yang tidak lengkap. Kolom yang memiliki nilai kosong adalah:
         - genre: 62 nilai kosong
         - type: 25 nilai kosong
         - rating: 230 nilai kosong
         Dengan menggunakan fungsi dropna(), semua baris yang mengandung nilai kosong dihapus dari dataset.
 
-    2. Menghapus Duplikat pada Dataset Rating
+2. Menghapus Duplikat pada Dataset Rating
         Dataset rating.csv diperiksa untuk duplikat berdasarkan kombinasi user_id dan anime_id. Duplikat yang ditemukan dihapus menggunakan fungsi drop_duplicates() untuk memastikan bahwa setiap pasangan pengguna dan anime hanya muncul sekali, menghindari bias dalam analisis rating.
 
-    3. Menggabungkan Dataset Anime dan Rating
+3. Menggabungkan Dataset Anime dan Rating
         Dataset anime dan rating digabungkan menggunakan fungsi merge() berdasarkan kolom anime_id. Kolom rating dari dataset rating diubah namanya menjadi user_rating untuk membedakan dengan kolom rating dari dataset anime. Penggabungan ini menghasilkan dataset fulldata yang berisi informasi lengkap tentang anime dan rating dari pengguna.
 
-    4. Menangani Nilai -1 pada Kolom User Rating
+4. Menangani Nilai -1 pada Kolom User Rating
         Dalam dataset rating.csv, nilai -1 pada kolom rating menunjukkan bahwa pengguna telah menonton anime tersebut tetapi tidak memberikan rating. Nilai -1 ini diganti dengan NaN (Not a Number) menggunakan fungsi replace(), dan kemudian semua baris yang mengandung NaN dihapus menggunakan dropna(). Langkah ini memastikan bahwa hanya rating yang valid yang digunakan dalam analisis.
 
-    5. Memfilter Pengguna dengan Minimal 50 Rating
+5. Memfilter Pengguna dengan Minimal 50 Rating
         Untuk meningkatkan kualitas analisis, hanya pengguna yang telah memberikan minimal 50 rating yang dipertahankan dalam dataset. Hal ini dilakukan dengan menghitung jumlah rating per pengguna menggunakan value_counts() dan memfilter dataset untuk hanya menyertakan pengguna yang memenuhi kriteria tersebut.
 
-    6. Membersihkan Nama Anime dari Karakter Khusus
+6. Membersihkan Nama Anime dari Karakter Khusus
         Beberapa nama anime mengandung karakter khusus atau entitas HTML seperti &quot;, &#039;, dan &amp;. Fungsi text_cleaning() digunakan untuk membersihkan nama-nama anime dari karakter-karakter tersebut, sehingga memudahkan dalam analisis dan visualisasi data.
 
-    7. Membuat Pivot Table untuk Analisis
+7. Membuat Pivot Table untuk Analisis
         Setelah data dibersihkan, pivot table dibuat menggunakan fungsi pivot_table() dengan name sebagai indeks, user_id sebagai kolom, dan user_rating sebagai nilai. Pivot table ini digunakan untuk analisis lebih lanjut, seperti sistem rekomendasi atau analisis pola rating pengguna.
 
 ## Modeling
