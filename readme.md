@@ -238,19 +238,16 @@ Dalam proyek ini, saya membangun dua sistem rekomendasi untuk membantu pengguna 
     | 9  | Choujin Locke                                     | 6.65   |
     | 10 | Naruto                                            | 7.81   |
 
----
-
-    ✅ Kelebihan:
+   ✅ Kelebihan:
         - Tidak bergantung pada data pengguna.
         - Dapat merekomendasikan item baru yang belum pernah dinilai.
         - Rekomendasi lebih mudah dijelaskan karena berbasis konten.
 
-    ❌ Kekurangan:
+   ❌ Kekurangan:
         - Kurang personalisasi karena tidak mempertimbangkan preferensi pengguna secara langsung.
         - Sangat bergantung pada kualitas dan kelengkapan data konten.
         - Rentan terhadap over-specialization (rekomendasi terlalu mirip dengan yang sudah disukai).
 
----
 
 
 ## Evaluation
