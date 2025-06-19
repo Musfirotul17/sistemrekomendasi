@@ -138,40 +138,49 @@ Distribusi Data: Rating yang diberikan oleh pengguna bervariasi, dengan beberapa
 
 ## Data Preparation
 1. Menghapus Nilai Kosong pada Dataset Anime
-        Langkah pertama dalam proses data preparation adalah menghapus nilai kosong (missing values) pada dataset anime.csv. Hal ini dilakukan untuk memastikan bahwa analisis selanjutnya tidak terganggu oleh data yang tidak lengkap. Kolom yang memiliki nilai kosong adalah:
+
+   Langkah pertama dalam proses data preparation adalah menghapus nilai kosong (missing values) pada dataset anime.csv. Hal ini dilakukan untuk memastikan bahwa analisis selanjutnya tidak terganggu oleh data yang tidak lengkap. Kolom yang memiliki nilai kosong adalah:
         - genre: 62 nilai kosong
         - type: 25 nilai kosong
         - rating: 230 nilai kosong
         Dengan menggunakan fungsi dropna(), semua baris yang mengandung nilai kosong dihapus dari dataset.
 
 2. Menghapus Duplikat pada Dataset Rating
-        Dataset rating.csv diperiksa untuk duplikat berdasarkan kombinasi user_id dan anime_id. Duplikat yang ditemukan dihapus menggunakan fungsi drop_duplicates() untuk memastikan bahwa setiap pasangan pengguna dan anime hanya muncul sekali, menghindari bias dalam analisis rating.
+
+   Dataset rating.csv diperiksa untuk duplikat berdasarkan kombinasi user_id dan anime_id. Duplikat yang ditemukan dihapus menggunakan fungsi drop_duplicates() untuk memastikan bahwa setiap pasangan pengguna dan anime hanya muncul sekali, menghindari bias dalam analisis rating.
 
 3. Menggabungkan Dataset Anime dan Rating
-        Dataset anime dan rating digabungkan menggunakan fungsi merge() berdasarkan kolom anime_id. Kolom rating dari dataset rating diubah namanya menjadi user_rating untuk membedakan dengan kolom rating dari dataset anime. Penggabungan ini menghasilkan dataset fulldata yang berisi informasi lengkap tentang anime dan rating dari pengguna.
+
+   Dataset anime dan rating digabungkan menggunakan fungsi merge() berdasarkan kolom anime_id. Kolom rating dari dataset rating diubah namanya menjadi user_rating untuk membedakan dengan kolom rating dari dataset anime. Penggabungan ini menghasilkan dataset fulldata yang berisi informasi lengkap tentang anime dan rating dari pengguna.
 
 4. Menangani Nilai -1 pada Kolom User Rating
-        Dalam dataset rating.csv, nilai -1 pada kolom rating menunjukkan bahwa pengguna telah menonton anime tersebut tetapi tidak memberikan rating. Nilai -1 ini diganti dengan NaN (Not a Number) menggunakan fungsi replace(), dan kemudian semua baris yang mengandung NaN dihapus menggunakan dropna(). Langkah ini memastikan bahwa hanya rating yang valid yang digunakan dalam analisis.
+
+   Dalam dataset rating.csv, nilai -1 pada kolom rating menunjukkan bahwa pengguna telah menonton anime tersebut tetapi tidak memberikan rating. Nilai -1 ini diganti dengan NaN (Not a Number) menggunakan fungsi replace(), dan kemudian semua baris yang mengandung NaN dihapus menggunakan dropna(). Langkah ini memastikan bahwa hanya rating yang valid yang digunakan dalam analisis.
 
 5. Memfilter Pengguna dengan Minimal 50 Rating
-        Untuk meningkatkan kualitas analisis, hanya pengguna yang telah memberikan minimal 50 rating yang dipertahankan dalam dataset. Hal ini dilakukan dengan menghitung jumlah rating per pengguna menggunakan value_counts() dan memfilter dataset untuk hanya menyertakan pengguna yang memenuhi kriteria tersebut.
+
+   Untuk meningkatkan kualitas analisis, hanya pengguna yang telah memberikan minimal 50 rating yang dipertahankan dalam dataset. Hal ini dilakukan dengan menghitung jumlah rating per pengguna menggunakan value_counts() dan memfilter dataset untuk hanya menyertakan pengguna yang memenuhi kriteria tersebut.
 
 6. Membuat Pivot Table untuk Analisis
-        Setelah data dibersihkan, pivot table dibuat menggunakan fungsi pivot_table() dengan name sebagai indeks, user_id sebagai kolom, dan user_rating sebagai nilai. Pivot table ini digunakan untuk analisis lebih lanjut, seperti sistem rekomendasi atau analisis pola rating pengguna.
 
+   Setelah data dibersihkan, pivot table dibuat menggunakan fungsi pivot_table() dengan name sebagai indeks, user_id sebagai kolom, dan user_rating sebagai nilai. Pivot table ini digunakan untuk analisis lebih lanjut, seperti sistem rekomendasi atau analisis pola rating pengguna.
+   
 7. Membersihkan Nama Anime dari Karakter Khusus
-        Beberapa nama anime mengandung karakter khusus atau entitas HTML seperti &quot;, &#039;, dan &amp;. Fungsi text_cleaning() digunakan untuk membersihkan nama-nama anime dari karakter-karakter tersebut, sehingga memudahkan dalam analisis dan visualisasi data.
+   
+   Beberapa nama anime mengandung karakter khusus atau entitas HTML seperti &quot;, &#039;, dan &amp;. Fungsi text_cleaning() digunakan untuk membersihkan nama-nama anime dari karakter-karakter tersebut, sehingga memudahkan dalam analisis dan visualisasi data.
 
 8. Membuat Pivot Tabel Baru dari data yang telah dibersihkan
-        Setelah membersihkan nama-nama anime dari karakter khusus, dibuat kembali pivot table menggunakan `pivot_table()` dengan `name` sebagai indeks, `user_id` sebagai kolom, dan `user_rating` sebagai nilai, lalu diisi dengan nol menggunakan `fillna(0)`. Pivot table ini digunakan sebagai dasar untuk membangun model sistem rekomendasi berbasis user.
+   
+   Setelah membersihkan nama-nama anime dari karakter khusus, dibuat kembali pivot table menggunakan `pivot_table()` dengan `name` sebagai indeks, `user_id` sebagai kolom, dan `user_rating` sebagai nilai, lalu diisi dengan nol menggunakan `fillna(0)`. Pivot table ini digunakan sebagai dasar untuk membangun model sistem rekomendasi berbasis user.
 
 9. Vektorisasi Fitur Genre menggunakan TF-IDF
+    
    Genre dari setiap anime diubah menjadi representasi numerik menggunakan teknik **TF-IDF Vectorization**. Proses ini mencakup pengaturan n-gram (unigram hingga trigram), penghapusan stopwords, serta penghilangan kata yang terlalu jarang muncul. Matriks hasil vektorisasi ini digunakan untuk menghitung kemiripan antar anime pada model Content-Based Filtering.
 
 10. Konversi Pivot Tabel ke Format CSR Matrix
+    
    Untuk mendukung model Collaborative Filtering, pivot table yang berisi interaksi antara pengguna dan anime diubah menjadi **Compressed Sparse Row (CSR) Matrix**. Konversi ini bertujuan untuk efisiensi penyimpanan dan kecepatan pemrosesan dalam operasi berbasis matriks, seperti pencarian tetangga terdekat dengan KNN.
-
----
+   
 
 
 
@@ -280,11 +289,14 @@ Berdasarkan hasil rekomendasi terhadap anime seperti *"Bleach"*, mayoritas anime
 
 **Definisi dan Formula:**
 
-Cosine Similarity mengukur tingkat kemiripan antara dua vektor berdasarkan arah (bukan nilai absolut):
+**Cosine Similarity** mengukur tingkat kemiripan antara dua vektor berdasarkan arah (bukan nilai absolut):
 
- $\text{cosine\_similarity}(A, B) = \frac{A \cdot B}{\|A\| \times \|B\|}$
+$$
+\text{Cosine Similarity}(A, B) = \frac{A \cdot B}{\|A\| \times \|B\|}
+$$
 
-Nilai berkisar antara 0 (tidak mirip) hingga 1 (sangat mirip).
+
+Nilai berkisar antara **0** (tidak mirip) hingga **1** (sangat mirip).
 
 ### **Hasil Evaluasi**
 
